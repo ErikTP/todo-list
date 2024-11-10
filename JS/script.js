@@ -7,8 +7,8 @@ let taskIdCounter = 1; // Räknare för att generera unika ID:n
 
 // Funktion för att generera ett unikt ID för varje uppgift
 function generateUniqueId() {
-    if (itemList.children.length === 0) { // Kontrollera om det finns några <li> element kvar i listan
-        taskIdCounter = 1; // Återställ räknaren om listan är tom
+    if (itemList.children.length === 0) { // Kontrollerar om det finns några <li> element kvar i listan
+        taskIdCounter = 1; // Återställer räknaren om listan är tom
     }
     return taskIdCounter++; // Ökar räknaren och returnerar dess värde som ID
 } 
@@ -23,6 +23,7 @@ function formUpdate(event) {
     inputItem.value = ""; // Rensar inputfältet
 } else {
     alert("Du har inte skrivit något. Försök igen!");
+    return;
 }
 };
 
@@ -56,13 +57,33 @@ function AddtaskButtons(listItem) {
     listItem.classList.toggle("marked"); // Växlar klassen "completed" för att markera som klar
     });
   
-    // Lägger till knappen till listobjektet
-    listItem.appendChild(markTaskButton);
-     // Lägger till knappen till listobjektet och sedan till listan
-    listItem.appendChild(removeTaskButton);
+    listItem.appendChild(markTaskButton); // Lägger till knappen till listobjektet
+    listItem.appendChild(removeTaskButton); // Lägger till knappen till listobjektet och sedan till listan
   }
 
+  // Funktion för att filtrera uppgifterna med en parameter "filter" vars värde fås vid klick event av namngivna knappar 
+function filterTasks(filter) {
+    const tasks = itemList.children; // Hämtar alla <li>-element i listan
 
+    // For-loop som går igenom en uppgift i taget och kontrollerar ifall den har klassnamnet "marked"    
+    for (const task of tasks) {
+        const taskCompleted = task.classList.contains("marked");
+
+        // Ifall knappen med värdet "showAll" klickas, så visas alla uppgifter oavsett om de är slutförda eller inte. 
+        if (filter === "showAll") {
+            task.style.display = "flex";
+        // Ifall knappen med värdet "showCompleted" klickas och taskCompleted är true, så visas endast slutförda uppgifter
+        } else if (filter === "showCompleted" && taskCompleted) {
+            task.style.display = "flex";
+        // Ifall knappen med värdet "showIncomplete" klickas och taskCompleted är false, så visas endast oavslutade uppgifter 
+        } else if (filter === "showIncomplete" && !taskCompleted) {
+            task.style.display = "flex";
+        // Här anges display: none; för alla uppgifter som inte uppfyller kraven för det valda filtret. Detta döljer de uppgifter som inte matchar det aktuella filtret     
+        } else {
+            task.style.display = "none";
+        }
+    }
+}
 
 // Eventlyssnare när användaren skickar något till formuläret  
 inputForm.addEventListener("submit", formUpdate);

@@ -17,7 +17,12 @@
           name="inputItem"
           placeholder="Skriv här en uppgift..."
         />
+    <div class="button-container">
         <button class="button" type="submit">Lägg till</button>
+        <button class="button" type="button" onclick="filterTasks('showAll')">Visa alla</button>
+        <button class="button" type="button" onclick="filterTasks('showCompleted')">Visa slutförda</button>
+        <button class="button" type="button" onclick="filterTasks('showIncomplete')">Visa oavslutade</button>
+    </div>
       </form>
        <ul id="itemList"></ul>
     </section>

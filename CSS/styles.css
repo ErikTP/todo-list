@@ -47,6 +47,12 @@ input[type="text"] {
     margin-bottom: var(--space-1x);
 }
 
+.button-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-1x);
+}
+
 .button {
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -110,3 +116,10 @@ li span {
     text-decoration: line-through; 
     color: var(--primary-color); 
   }
+
+@media (max-width: 800px) {
+    .button {
+    font-size: 1.45rem; 
+    padding: 0.5rem; 
+    }
+}
