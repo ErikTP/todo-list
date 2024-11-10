@@ -3,12 +3,20 @@ const inputForm = document.getElementById("inputForm");
 const inputItem = document.getElementById("inputItem");
 const itemList = document.getElementById("itemList");
 
+let taskIdCounter = 1; // Räknare för att generera unika ID:n
+
+// Funktion för att generera ett unikt ID för varje uppgift
+function generateUniqueId() {
+  return taskIdCounter++; // Ökar räknaren och returnerar dess värde som ID
+} 
+
 // Funktion för att hantera uppdateringar i formuläret
 function formUpdate(event) {
   event.preventDefault(); // Förhindrar att sidan laddas om
   const taskText = inputItem.value.trim(); // Hämtar och trimar texten i input så att blanksteg elimineras
   if (taskText !== "") {
-    addTask(taskText); // Lägger till ny uppgift
+    const taskId = generateUniqueId(); // Skapar ett unikt ID för uppgiften
+    addTask(taskText, taskId); // Lägger till ny uppgift med ID
     inputItem.value = ""; // Rensar inputfältet
 } else {
     alert("Du har inte skrivit något. Försök igen!");
@@ -16,9 +24,9 @@ function formUpdate(event) {
 };
 
 // Funktion för att lägga till en ny uppgift
-function addTask(taskText) {
+function addTask(taskText, taskId) {
     const listItem = document.createElement("li"); // Skapar en ny <li> element
-    listItem.textContent = taskText; // Sätter uppgiftstexten
+    listItem.textContent = listItem.textContent = `#${taskId} - ${taskText}`; // Sätter uppgiftstexten och visar ID
     itemList.appendChild(listItem); // Lägger till <li> elementet som ett listobjekt till listan med <ul> element
     removeButton(listItem); // Lägger till ta-bort-knappen för den nya uppgiften
 }
