@@ -1,93 +1,133 @@
-# TODO-Lista-Projekt
+TODO-Lista Reflektion - Erik Torres Puente
+====================================
 
+### 1. Hur fungerar addEventListener och hur har det använts för att manipulera DOM i TODO-listan?
 
+addEventListener är en metod som används för att lyssna på händelser på ett specifikt DOM-element, vilket innebär att den "fångar upp" när en användare gör något som att klicka på en knapp eller skicka ett formulär. Med addEventListener kan man koppla händelser direkt till funktioner utan att påverka HTML-koden, vilket bidrar till att hålla både struktur & stil ren och förståeligt.
 
-## Getting started
+I TODO-listan används addEventListener för att:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+-   **Lyssna på formulärets "submit"-händelse**: Detta triggar funktionen formUpdate när användaren försöker lägga till en ny uppgift.
+    
+-   **Hantera "klick"-händelser på knappar**: Funktionen AddtaskButtons skapar och lägger till knappar som tar bort eller markerar uppgifter, och varje knapp har en addEventListener kopplad till sig. Detta gör att en användare kan interagera dynamiskt med enskilda uppgifter i listan.
+    
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### 2. Vilka operatorer och kontrollstrukturer användes i uppgiften och varför?
 
-## Add your files
+Några vanliga operatorer och kontrollstrukturer som används i koden är:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+-   **Operatorer**:
+    
+    -   **Tilldelningsoperator** (=): Används för att tilldela värden till variabler. Exempelvis "let taskIdCounter = 1;".
+        
+    -   **Jämförelseoperatorer** (===, !==): Dessa jämför värden och typer, och används här för att kontrollera om "inputItem" är tomt eller om en "uppgift är slutförd".
+        
+    -   **Logiska operatorer** (&&, ||): Dessa används i filterfunktionen för att styra när en "uppgift ska visas".
+        
+    -   **Increment operator (++)**: Används i "generateUniqueId()" för att unikt identifiera varje uppgift genom att returnera en räknare som adderades med värdet 1. Kod: "return taskIdCounter++;". 
+        
+-   **Kontrollstrukturer**:
+    
+    -   **if-satser**: Används för att styra olika val beroende på villkor, exempelvis för att kontrollera om "inputItem" är tomt eller filtrera "vilka uppgifter som ska visas".
+        
+    -   **Loop (for-of)**: Används för att iterera över alla uppgifter i listan och tillämpa filterfunktionen beroende på användarens val.
+        
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/ErikTP/todo-lista-projekt.git
-git branch -M main
-git push -uf origin main
-```
+Dessa kontrollstrukturer gör koden flexibel och interaktiv, eftersom de styr när något ska läggas till, tas bort eller visas beroende på specifika villkor.
 
-## Integrate with your tools
+### 3. Hur har funktioner använts för att undvika kodupprepning och strukturera lösningen?
 
-- [ ] [Set up project integrations](https://gitlab.com/ErikTP/todo-lista-projekt/-/settings/integrations)
+Funktioner har använts på ett modulärt sätt för att hantera specifika uppgifter:
 
-## Collaborate with your team
+-   **formUpdate**: Hanterar inskickning av uppgifter och undviker att samma logik behöver skrivas om varje gång en uppgift läggs till.
+    
+-   **addTask**: Skapar ett nytt listobjekt för varje uppgift, vilket gör det enkelt att anpassa strukturen för varje ny uppgift.
+    
+-   **AddtaskButtons**: Separat funktion för att lägga till knappar för att markera och ta bort uppgifter. Genom att hantera dessa i en egen funktion kan samma knappar enkelt återanvändas för varje ny uppgift.
+    
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Genom att skapa funktioner för varje delsteg reduceras kodupprepningen, vilket gör koden mer läsbar och enklare att felsöka.
 
-## Test and Deploy
+### 4. Hur kan man skapa en fungerande dynamisk komponent på en webbsida med JavaScript?
 
-Use the built-in continuous integration in GitLab.
+För att skapa en dynamisk komponent kan man:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+1.  **Definiera HTML-struktur och CSS-styling** för att skapa en grundläggande layout och stil.
+    
+2.  **Använda JavaScript för att manipulera DOM**: Genom att skapa, ändra och ta bort HTML-element kan man bygga interaktivitet.
+    
+3.  **Lägga till event-lyssnare** för att fånga användarens handlingar, exempelvis när de trycker på knappar eller fyller i fält.
+    
+4.  **Använda funktioner och logik** för att utföra olika uppgifter dynamiskt, exempelvis lägga till nya element eller ändra befintliga baserat på användarens interaktion.
+    
 
-***
+Dessa steg gör att komponenten kan reagera på användarens input och ge omedelbar feedback, vilket är grunden för dynamiska komponenter.
 
-# Editing this README
+### 5. Beskriv designbesluten för den dynamiska komponenten. Varför valdes vissa metoder och kontrollstrukturer?
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+När TODO-listan byggdes användes flera designbeslut för att skapa en användarvänlig, modulär och lättanvänd komponent. Här är en översikt av de viktigaste besluten och motiveringarna bakom dem:
 
-## Suggestions for a good README
+**1. Modulära funktioner för att dela upp koden**
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+-   **Varför:** Genom att dela upp koden i mindre funktioner blir den mer strukturerad, lättläst och enkel att underhålla. Varje funktion har ett tydligt syfte och ansvar, vilket också gör felsökning enklare.
+    
+-   **Exempel:** Skapade separata funktioner som "formUpdate" för att hantera formulärinlämning, "addTask" för att lägga till en uppgift och "AddtaskButtons" för att lägga till knappar för att markera eller ta bort uppgifter.
+    
+**2. Användning av addEventListener istället för inline-event**
 
-## Name
-Choose a self-explaining name for your project.
+-   **Varför:** För att hålla JavaScript-logiken separat från HTML-strukturen och därigenom lättförståelig. Detta innebär att nästan all logik hanterades i JavaScript-filen istället för i HTML, vilket gör det enklare att underhålla och utveckla applikationen vidare.
+    
+-   **Exempel:** Använde addEventListener för att lyssna på formulärets "submit"-händelse och för att lägga till knapparnas funktioner direkt i JavaScript (förutom knapparna för filtrering). 
+    
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+**3. Filterfunktion med logiska villkor och if-satser**
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+-   **Varför:** Filterfunktionen gör det möjligt att visa alla, slutförda eller oavslutade uppgifter genom att lägga in olika villkor. Detta gör listan mer användarvänlig och effektiv för att sortera uppgifter.
+    
+-   **Exempel:** Använde if-satser för att kontrollera om en uppgift ska visas beroende på om den är markerad som slutförd eller ej. Genom att använda filterTasks-funktionen kan användaren enkelt växla mellan olika visuella perspektiv utan att skapa nya listor eller tillföra kod till andra funktioner.
+    
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+**4. Generering av unika ID med inkrementoperatorn ++**
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+-   **Varför:** För att varje uppgift ska ha ett unikt ID som identifierar den, vilket ger en tydligare struktur och gör det enklare att referera till specifika uppgifter i listan. Detta kan vara användbart om listan behöver utökas eller spåras på något sätt.
+    
+-   **Exempel:** Använder en räknare, "taskIdCounter", som ökar med ++ varje gång en ny uppgift skapas. Detta ID visas även för användaren, vilket gör att varje uppgift lättare kan särskiljas i listan.
+    
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**5. DOM-manipulation för att dynamiskt lägga till, ändra och ta bort uppgifter**
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+-   **Varför:** Genom att manipulera DOM (Document Object Model) med JavaScript kan man skapa en dynamisk användarupplevelse där uppgifter läggs till, uppdateras eller tas bort utan att sidan behöver laddas om.
+    
+-   **Exempel:** När en ny uppgift läggs till skapas ett nytt element som läggs till i listan med appendChild. Här manipuleras också DOM när uppgifter markeras som klara genom att lägga till och ta bort klassnamn (med classList.toggle) som styr uppgiftens stil.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**6. Enkel och direkt användarfeedback**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+-   **Varför:** Genom att ge direkt feedback kan användaren se resultatet av sina handlingar omedelbart. Detta skapar en bättre användarupplevelse och gör applikationen mer tolkbar att använda.
+    
+-   **Exempel:** När användaren försöker lägga till en tom uppgift, visas en alert för att tydligt informera om att uppgiften är tom. På samma sätt ändras en uppgifts stil när den markeras som klar, vilket ger visuell feedback om att en uppgift är slutförd.
+    
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### 6. Hur fungerar DOM-manipulation och hur har det använts för att utveckla lösningen?
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+DOM-manipulation innebär att man ändrar strukturen och innehållet i HTML-dokumentet genom JavaScript. I denna lösning används DOM-manipulation för att:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+-   **Skapa och lägga till nya element**: Varje gång en uppgift läggs till i listan via "document.createElement" skapas exempelvis nya element som li-element, span-element, och button-element för text och knappar.  
 
-## License
-For open source projects, say how it is licensed.
+-   **Ändra klassnamn för styling**: När en uppgift markeras som klar läggs en klass till med "classList.toggle", vilket möjliggör CSS-styling som stryker över texten.
+    
+-   **Ta bort element från DOM**: När en uppgift tas bort, raderas den från DOM med "removeChild", vilket ger användaren omedelbar visuell feedback.
+    
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Genom att manipulera DOM på detta sätt blir TODO-listan interaktiv och ger omedelbara ändringar baserade på användarens input.
+
+### 7. Redogör utförligt för hur olika operatorer fungerar i JavaScript och när det är lämpligt att använda specifika operatorer.
+
+-   **Tilldelningsoperatorn (=)**: Används för att tilldela ett värde till en variabel, t.ex. "let taskIdCounter = 1;".
+    
+-   **Jämförelseoperatorer (==, ===, !=, !==)**: (==) jämför värden oavsett typ medan (===) jämför både värde och typ. (===) är att föredra eftersom det minskar risken för plötsliga typkonverteringar, vilket gör koden mer stadig.
+    
+-   **Aritmetiska operatorer (+, -, *, /, %)**: Dessa används för att utföra matematiska operationer. Exempelvis används ++ för att öka räknaren för att skapa unika ID.
+    
+-   **Logiska operatorer (&&, ||, !)**: Dessa används för att skapa villkor som samtidigt bör uppfyllas för ett resultat. Till exempel används && i filterfunktionen för att visa uppgifter som både är slutförda och markerade.
+    
+-   **Villkorlig operator (? :)**: En kortare syntax för if-else-uttryck, ofta användbar för kortare villkor eller när man vill göra en snabb funktion baserat på ett villkor.
